@@ -1,0 +1,73 @@
+<div class="nosubnav fullWidth">
+    <br>
+
+    <div class="row fullExtremeWidth">
+        <div class="small-5 columns">
+            <div class="row" style="text-align: center">
+                <div class="small-8 small-offset-2 columns">
+                    <div class="box">
+                        <div class="box-icon">
+                            <span><i class="fa fa-user fa-2x"></i></span>
+                        </div>
+                        <div class="info">
+                            <h4 style="word-wrap: break-word;">{{vm.user.name}}</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="small-5 columns end">
+            <h4 style="text-align: center">Edit Profile</h4>
+
+            <form name="vm.profileForm" valdr-type="User" novalidate>
+                <div class="row">
+                    <div class="row collapse prefix-radius">
+                        <div class="small-5 columns">
+                            <span class="prefix">Current Password</span>
+                        </div>
+                        <div class="small-5 columns end" valdr-form-group>
+                            <input type="password" class="form-control" placeholder="Password"
+                                   ng-model="vm.updatedPassword.currentPwd" name="password"
+                                   required/>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="row collapse prefix-radius">
+                        <div class="small-5 columns">
+                            <span class="prefix">New Password</span>
+                        </div>
+                        <div class="small-5 columns end" valdr-form-group>
+                            <input type="password" class="form-control" placeholder="Password"
+                                   ng-model="vm.updatedPassword.newPwd" name="password"
+                                   required/>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="row collapse prefix-radius">
+                        <div class="small-5 columns">
+                            <span class="prefix">Verify New Password</span>
+                        </div>
+                        <div class="small-5 columns end" valdr-form-group>
+                            <input type="password" class="form-control" placeholder="Password"
+                                   ng-model="vm.updatedPassword.verifyNewPwd" name="password"
+                                   required/>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="row">
+                        <div class="small-4 small-offset-6 columns end">
+                            <button class="button radius tiny right" ng-disabled="vm.profileForm.$invalid"
+                                    ng-click="vm.ChangePassword(vm.updatedPassword)">
+                                Save
+                                Password
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

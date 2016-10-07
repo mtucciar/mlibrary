@@ -1,0 +1,15 @@
+<div class="row subnav entireWidth">
+    <div class="small-12 columns" style="padding-top: 5px;">
+        <ul class="inline-list">
+            <li ng-repeat="item in navItems" style="padding-left: 20px;">
+                <a ng-if="!IsCurrent(item) && item.Enabled && item.Visible"
+                   ui-sref="{{item.Link}}">{{item.Title}}</a>
+
+                <p ng-if="IsCurrent(item)"
+                   ng-class="{ inlineListActive: IsCurrent(item)}">{{item.Title}}</p>
+
+                <p ng-if="!item.Enabled && item.Visible">{{item.Title}}</p>
+            </li>
+        </ul>
+    </div>
+</div>

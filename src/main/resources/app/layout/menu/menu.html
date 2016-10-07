@@ -1,0 +1,48 @@
+<nav class="top-bar" role="navigation" ng-show="vm.show" data-options="is_hover:true" data-topbar
+     ng-controller="Menu as vm">
+    <div class="logo">
+        <a ng-click="vm.Home.MenuLink()"><img class="middle" src="content/images/logo.png"
+                                              style="width:61px;height:61px;">
+        </a>
+    </div>
+
+    <section class="top-bar-section">
+        <ul>
+            <li ng-show="vm.GetCurrentProject()">
+                <p class="projectName"><b style="color: white;" title="{{vm.GetCurrentProject()}}">{{vm.GetCurrentProject()
+                    | limitTo:
+                    10}}<span
+                            ng-if="vm.GetCurrentProject().length > 10">...</span></b></p>
+            </li>
+        </ul>
+        <ul class="center-buttons">
+            <li ui-sref-active="active" ng-repeat="r in vm.navRoutes">
+                <a ui-sref="{{r.name}}" ui-sref-opts="{reload: true}" ng-if="r.settings.enabled"
+                   ng-bind-html="r.settings.content">
+                </a>
+                <p class="disabledMenuItem pad-right pad-left" ng-if="!r.settings.enabled"
+                   ng-bind-html="r.settings.content">
+                </p>
+                <div class="nav-indicator" ng-show="vm.isCurrent(r)"></div>
+            </li>
+        </ul>
+        <ul class="right" style="right: 45px; margin-right: 5px;">
+            <li ui-sref-active="active" class="has-dropdown not-click">
+                <a title="Profile"
+                   ui-sref="{{vm.ProfileLink.name}}" ui-sref-opts="{reload: true}">
+                    <b title="{{vm.ProfileLink.Title}}">{{vm.ProfileLink.Title | limitTo:
+                        25}}<span
+                                ng-if="vm.ProfileLink.Title.length > 25">...</span></b>
+                </a>
+                <ul class="dropdown">
+                    <li ng-repeat="item in vm.GeneralNav" ng-show="item.Visibility"
+                        ng-class="{divider: item.Title === 'divider'}"><a ng-if="item.Title !== 'divider'"
+                                                                          ng-click="item.MenuLink()"><i
+                            class="{{item.Icon}} size-18 pad-right pad-top"></i>{{item.Title}}</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </section>
+</nav>
+<pa-header ng-show="vm.show === false" logo-click="Home.MenuLink()"></pa-header>

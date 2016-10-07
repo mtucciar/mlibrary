@@ -1,0 +1,87 @@
+/**
+ * Created by mtucciarone on 18/04/2016.
+ */
+describe('Users API', function() {
+    var $httpBackend, userFactory, postHandler, getAuthHandler, users;
+    var baseURL = '/api/1.0/users/';
+
+    // Set up the module
+    beforeEach(module('app.core'));
+
+    beforeEach(inject(function($injector, _usersAPI_) {
+
+        // Set up the mock http service responses
+        $httpBackend = $injector.get('$httpBackend');
+        // backend definition common for all tests
+        postHandler = $httpBackend.when('POST', baseURL)
+                                  .respond(201, {
+                                      "created": "2016-04-18T13:22:31.231Z",
+                                      "updated": "2016-04-18T13:22:31.263Z",
+                                      "enabled": true,
+                                      "name": "myUser",
+                                      "id": "571517d7e19a421d7090d485",
+                                      "displayName": "Full user Name",
+                                      "email": "username@username.com"
+                                  });
+
+        getAuthHandler = $httpBackend.when('GET', baseURL)
+                                     .respond(function() {
+                                             if (!users) {
+                                                 return 200;
+                                             }
+                                             else {
+                                                 return 400;
+                                             }
+                                         },
+                                         function() {
+                                             if (!users) {
+                                                 return {};
+                                             }
+                                             else {
+                                                 return {
+                                                     errorMessage: "Authorization Header missing.",
+                                                     code: 400
+                                                 };
+                                             }
+                                         });
+
+        userFactory = _usersAPI_;
+
+    }));
+
+    afterEach(function() {
+        $httpBackend.verifyNoOutstandingExpectation();
+        $httpBackend.verifyNoOutstandingRequest();
+    });
+
+    it('should make a get request', function() {
+        $httpBackend.expectGET(baseURL) 
+                    .respond(getAuthHandler);
+        userFactory.GetUsers();
+        $httpBackend.flush();
+    });
+
+    it('should give an OK when no users are present', function() {
+        $httpBackend.expectGET(baseURL)
+                    .respond(getAuthHandler);
+        userFactory.GetUsers()
+                   .then(function(data) {
+                       console.log(data.respond().data);
+                   });
+        $httpBackend.flush();
+    });
+
+    it('should make a post request', function() {
+        var obj = {
+            "displayName": "Full user Name",
+            "password": "password",
+            "email": "username@username.com",
+            "name": "myUser"
+        };
+        $httpBackend.expectPOST(baseURL, obj)
+                    .respond();
+        userFactory.AddUser(obj);
+        $httpBackend.flush();
+    });
+
+});

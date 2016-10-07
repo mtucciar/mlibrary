@@ -1,0 +1,56 @@
+<div class="off-canvas-wrap" data-offcanvas>
+    <div class="nosubnav inner-wrap threeQuarterWidth" ng-show="vm.HasLoaded">
+        <br>
+        <div class="row">
+            <div class="small-3 columns end">
+                <button class="button small radius" ng-click="vm.StartProject()"><i
+                        class="fa fa-plus fa-lg" style="margin-right: 5px;"></i>New Library
+                </button>
+            </div>
+        </div>
+
+        <div class="row" ng-if="vm.CurrentProjectList.length === 0">
+            <div class="panel radius">
+                <h6>To begin, create a library and pick your files.</h6>
+            </div>
+        </div>
+        <div class="row " ng-if="vm.CurrentProjectList.length > 0">
+            <div class="small-12 columns">
+                <div class="spacedTableContainer">
+                    <table class="spacedTable2" st-table="vm.CurrentProjectListST" st-safe-src="vm.CurrentProjectList"
+                           style="border-spacing: 0;">
+                        <thead>
+                        <tr>
+                            <th style="width: 50%" st-sort="name">Library<i class=""></i></th>
+                            <th style="width: 20%" st-sort="files.length">No. of Files</th>
+                            <th style="width: 20%" st-sort="created">Date Created</th>
+                            <th style="width: 10%">Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr style="background-color: white !important;"
+                            ng-repeat="project in vm.CurrentProjectListST track by project.id">
+                            <td style='padding: 1.625rem 0.925rem;'>
+                                <a ng-click="vm.LoadProject(project)" class="sixtyFourChar">{{project.name}}</a>
+                            </td>
+                            <td style='padding: 1.625rem 0.925rem;'>
+                                {{project.files.length}}
+                            </td>
+                            <td style='padding: 1.625rem 0.925rem;'>
+                                {{project.created | date: 'mediumDate'}}
+                            </td>
+                            <td style='padding: 1.625rem 0.925rem;' class="text-center">
+                                <a dropdown-toggle="#dropdown-example-{{$index}}"><i class="fi-widget size-18"
+                                                                                     tooltip="{{vm.actionsTip}}"></i></a>
+                                <ul id="dropdown-example-{{$index}}" class="f-dropdown">
+                                    <li><a ng-click="vm.DeleteProject(project, $index)">Delete</a></li>
+                                </ul>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

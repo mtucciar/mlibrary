@@ -1,0 +1,39 @@
+<div class="row">
+    <form name="advancedDetectForm" novalidate>
+        <h5 class="text-center fg-info">Preferred Date Formats</h5>
+
+        <div class="row text-center">
+            <small>Drag the date formats that you want detected and arrange them from preferred to least preferred
+            </small>
+        </div>
+        <div class="row datesList">
+            <div class="small-8 small-offset-2 columns end">
+                <div class="row">
+                    <div class="small-6 columns" ng-repeat="col in vm.models.lists">
+                        <p class="text-center">{{col.title}}</p>
+                        <ul dnd-list="col.list">
+                            <li ng-repeat="item in col.list"
+                                dnd-draggable="item"
+                                dnd-moved="col.list.splice($index, 1)"
+                                dnd-effect-allowed="move"
+                                dnd-selected="models.selected = item"
+                                ng-class="{'selected': models.selected === item}">
+                                {{item.label}}
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="small-12 columns">
+                <button class="button radius right"
+                        ng-click="advancedDetectForm.$valid && vm.SetAdvanced()"
+                        ng-disabled="advancedDetectForm.$invalid">Ok
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
+<pa-modal-error ng-if="vm.error" alertobject="vm.error"></pa-modal-error>
+<a class="close-reveal-modal" aria-label="Close" ng-click="vm.Cancel()">&#215;</a>

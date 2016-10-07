@@ -1,0 +1,41 @@
+<!--<pa-header logo-click="Home.MenuLink()"></pa-header>-->
+<!--<br>-->
+<div class="row fullExtremeWidth">
+    <div class="small-9 columns small-collapse" style="text-align:center;">
+        <pa-splash-image></pa-splash-image>
+    </div>
+    <div class="small-3 columns" ng-show="vm.IsWorking">
+        <pa-spinner spin-text="Logging In..."></pa-spinner>
+    </div>
+    <div class="small-3 columns" ng-show="!vm.IsWorking">
+        <br>
+        <br>
+
+        <form name="loginForm" valdr-type="User" novalidate>
+            <div class="row radius panel" style="background-color: #fafafa;">
+                <h5 class="text-center">{{vm.applicationName}} Login</h5>
+
+                <div class="row radius">
+                    <div class="small-11 small-centered columns" valdr-form-group>
+                        <input type="text" class="form-control radius" placeholder="Username" ng-model="vm.user.name"
+                               name="userName" required/>
+                    </div>
+                </div>
+                <div class="row radius">
+                    <div class="small-11 small-centered columns" valdr-form-group>
+                        <input type="password" class="form-control radius" placeholder="Password"
+                               name="password" ng-model="vm.user.password" required>
+                    </div>
+                </div>
+                <div class="row collapse">
+                    <div class="small-11 small-centered columns">
+                        <button type="submit" ng-click="vm.Login()" class="button radius expand"><i
+                                class="fa fa-sign-in size-18" style="margin-right: 10px;"></i>Login
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<pa-footer></pa-footer>

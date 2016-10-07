@@ -1,0 +1,6 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: MLibrary
+Bundle-SymbolicName: com.mtucciarone.mlibrary
+Created-By: 1.8.0_25 (Oracle Corporation)
+Web-ContextPath: /ui

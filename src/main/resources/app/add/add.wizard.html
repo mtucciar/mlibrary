@@ -1,0 +1,18 @@
+<div>
+    <h4 class="text-center">Library Setup</h4>
+    <div class="row">
+        <div class="small-12 columns small-centered">
+            <div class="middle text-center">
+                <div class="{{item.Color}} callout-card radius" ng-show="item.Visible"
+                     ng-repeat="item in vm.navigationItems">
+                    <a ng-click="item.MenuLink()">
+                        <div class="callout-card-content">
+                            <img class="lead" style="width:100px;height:100px" ng-src="{{item.Image}}"/>
+                            <p>{{ item.Title }}</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

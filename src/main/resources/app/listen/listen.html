@@ -1,0 +1,282 @@
+<form name="vm.dataDetailsForm" valdr-type="DataDetails" novalidate>
+    <div class="row fullExtremeWidth">
+        <div class="small-8 small-offset-2 columns end">
+            <div class="row entireWidth">
+                <div class="info callout-card-alt radius">
+                    <div class="callout-card-content">
+                        <div class="row entireWidth">
+                            <div class="row">
+                                <div class="small-8 columns">
+                                    <p class="noPadMarg"><i class="fa fa-globe fa-lg pad-right"></i>Geographic
+                                        population
+                                        the
+                                        data was
+                                        drawn
+                                        from:</p>
+                                    <small>(e.g. if participants are from all over the US, use US
+                                        Population:
+                                        322.9 million)
+                                    </small>
+                                </div>
+                                <div class="small-4 columns" valdr-form-group>
+                                    <select ng-options="item as item.name for item in vm.PopulationSizes"
+                                            ng-model="vm.dataDetails.populationItem"
+                                            ng-change="vm.CustomPopulation(vm.dataDetails.populationItem)">
+                                    </select>
+                                    <div class="row collapse" ng-if="vm.customPopulation">
+                                        <div class="small-9 columns">
+                                            <input type="text"
+                                                   name="population"
+                                                   ng-blur="vm.SaveModel()()"
+                                                   ng-model="vm.dataDetails.populationItem.size"
+                                                   pa-input-separator/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <!--<div ng-show="customPopulation" style="padding-top: 60px;"></div>-->
+                                <div class="small-8 columns" style="padding-left: 10px; padding-top: 10px;">
+                                    <p><i class="fa fa-comments fa-lg pad-right"></i>The data recipient may know
+                                        someone in the dataset</p>
+                                </div>
+                                <div class="small-4 columns" style="padding-top: 10px">
+                                    <input type="radio" name="t2Enabled"
+                                           class="form-control" ng-model="vm.dataDetails.t2Enabled"
+                                           ng-change="vm.SaveModel()"
+                                           ng-value="true"/><label>Yes</label>
+
+                                    <input type="radio" name="t2Enabled"
+                                           class="form-control" ng-model="vm.dataDetails.t2Enabled"
+                                           ng-change="vm.SaveModel()"
+                                           ng-value="false"/><label>No</label>
+                                    <i popover-trigger="mouseenter" popover-placement="bottom"
+                                       popover="By selecting 'No', the measurement of inadvertently recognizing someone in the dataset will not be factored into the risk result."
+                                       ng-if="!vm.dataDetails.t2Enabled"
+                                       class="fa fa-warning fa-lg fg-warning"></i>
+                                </div>
+                            </div>
+                            <div class="row" ng-show="vm.dataDetails.t2Enabled">
+                                <div class="small-8 columns" style="padding-left: 10px; padding-top: 10px;">
+                                    <p>
+                                        <i class="fi fi-results-demographics fa-lg pad-right"></i>
+                                        The data recipient &
+                                        the
+                                        individuals in the
+                                        dataset are from the
+                                        same population.</p>
+                                </div>
+                                <div class="small-4 columns" style="padding-top: 10px">
+                                    <input type="radio" name="samePop" ng-change="vm.SaveModel()"
+                                           class="form-control" ng-model="vm.dataDetails.samePopulation"
+                                           ng-value="true"/><label>Yes</label>
+
+                                    <input type="radio" name="samePop" ng-change="vm.SaveModel()"
+                                           class="form-control" ng-model="vm.dataDetails.samePopulation"
+                                           ng-value="false"/><label>No</label>
+                                </div>
+                            </div>
+
+                            <div class="row" ng-show="vm.dataDetails.t2Enabled">
+                                <div class="small-8 columns" ng-show="vm.dataDetails.samePopulation === false">
+                                    <label style="font-size: 80%;" style="padding-left: 15px;"><i>Population
+                                        that
+                                        encompasses both data
+                                        recipient and individuals in the dataset:</i></label>
+                                </div>
+                                <div class="small-4 columns" valdr-form-group
+                                     ng-if="vm.dataDetails.samePopulation === false && vm.dataDetails.t2Enabled">
+                                    <div class="small-8 columns">
+                                        <input type="text" name="t2Population"
+                                               ng-model="vm.dataDetails.t2Population"
+                                               ng-blur="vm.SaveChangesInput()"
+                                               pa-input-separator
+                                               population/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row entireWidth">
+                <div class="info callout-card-alt radius">
+                    <div class="callout-card-content">
+                        <div class="row entireWidth">
+                            <div class="small-8 columns">
+                                <div class="row entireWidth">
+                                    <p class="collapse noPadMarg"><i class="fa fa-group fa-lg pad-right"></i>Prevalence
+                                        of identifying
+                                        factor(s):</p>
+                                    <small class="noPadMarg">(e.g. diabetes has a prevalence of 9.3% in the US
+                                        population)
+                                    </small>
+                                </div>
+                            </div>
+                            <div class="small-4 columns" valdr-form-group>
+                                <div class="row collapse">
+                                    <div class="small-7 columns end input-percentage">
+                                        <input type="text"
+                                               style="width: 5em;" name="percentage"
+                                               ng-model="vm.dataDetails.tempPrevalence"
+                                               ng-blur="vm.SaveChangesInput()"
+                                               required/>
+                                        <span>%</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row entireWidth" ng-show="vm.dataDetails.t2Enabled">
+                <div class="info callout-card-alt radius">
+                    <div class="callout-card-content">
+                        <div class="row entireWidth">
+                            <div class="small-8 columns">
+                                <div class="row entireWidth">
+                                    <p class="collapse noPadMarg"><i class="fa fa-venus-mars fa-lg pad-right"></i>Identifying
+                                        factor is
+                                        biological-sex specific</p>
+                                    <small class="noPadMarg">(e.g. breast cancer is considered biological-sex
+                                        specific)
+                                    </small>
+                                </div>
+                            </div>
+                            <div class="small-4 columns">
+                                <input type="radio" name="sexSpecific"
+                                       ng-change="vm.SaveModel()"
+                                       class="form-control" ng-model="vm.dataDetails.sexSpecific"
+                                       ng-value="true"/><label>Yes</label>
+
+                                <input type="radio" name="sexSpecific"
+                                       ng-change="vm.SaveModel()"
+                                       class="form-control" ng-model="vm.dataDetails.sexSpecific"
+                                       ng-value="false"/><label>No</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row entireWidth">
+                <div class="info callout-card-alt radius">
+                    <div class="callout-card-content">
+                        <div class="row entireWidth">
+                            <div class="row">
+                                <div class="small-8 columns end">
+                                    <p class="noPadMarg"><i class="fa fa-list fa-lg pad-right"></i>Context Assessments
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="row pad-top">
+                                <div class="small-3 columns" style="text-align: right;">
+                                    <p style="font-size: 85%; padding-top: 5px;">Privacy & Security</p>
+                                </div>
+                                <div class="small-6 columns">
+                                    <rzslider
+                                            rz-slider-model="vm.privacyAndSecuritySlider.value"
+                                            rz-slider-options="vm.privacyAndSecuritySlider.options"></rzslider>
+                                </div>
+                                <div class="small-3 columns">
+                                    <input id="privacyAndSecurity"
+                                           onchange="angular.element(this).scope().SelectFile(this, 'ds');"
+                                           class="file"
+                                           type="file" ng-disabled="vm.IsUploading" accept="{{vm.SupportedFileFormats}}"
+                                           style="display:none;"/>
+                                    <button class="button radius tiny"
+                                            ng-class="{success: vm.privacyAndSecuritySlider.pdfLoaded}"
+                                            ng-click="vm.privacyAndSecuritySlider.LoadPDF()"
+                                            tooltip="{{vm.loadMitigatingCtrlsTip}}"><i
+                                            class="fa fa-file-pdf-o fa-2x"></i></button>
+                                    <a ng-show="vm.privacyAndSecuritySlider.pdfLoaded"
+                                       ng-click="vm.privacyAndSecuritySlider.DeletePDF()"><i
+                                            class="fa fa-trash" tooltip="{{vm.deleteRAQTip}}"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="row" style="padding-bottom: 2px;">
+                                <div class="small-3 columns" style="text-align: right;">
+                                    <p style="font-size: 85%; padding-top: 5px;">Recipient Trust</p>
+                                </div>
+                                <div class="small-6 columns">
+                                    <rzslider
+                                            rz-slider-model="vm.recipientTrustSlider.value"
+                                            rz-slider-options="vm.recipientTrustSlider.options"></rzslider>
+                                </div>
+                                <div class="small-3 columns">
+                                    <input id="recipientTrust"
+                                           onchange="angular.element(this).scope().SelectFile(this, 'rs');"
+                                           class="file"
+                                           type="file" ng-disabled="vm.IsUploading" accept="{{vm.SupportedFileFormats}}"
+                                           style="display:none;"/>
+                                    <button class="button radius tiny"
+                                            ng-class="{success: vm.recipientTrustSlider.pdfLoaded}"
+                                            ng-click="vm.recipientTrustSlider.LoadPDF()"
+                                            tooltip="{{vm.loadMotiveCapacityTip}}">
+                                        <i class="fa fa-file-pdf-o fa-2x"></i>
+                                    </button>
+                                    <a ng-show="vm.recipientTrustSlider.pdfLoaded"
+                                       ng-click="vm.recipientTrustSlider.DeletePDF()"><i
+                                            class="fa fa-trash" tooltip="{{vm.deleteRAQTip}}"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="row" style="padding-bottom: 2px;">
+                                <div class="small-3 columns" style="text-align: right;">
+                                    <p style="font-size: 85%; padding-top: 5px;">Data Sensitivity</p>
+                                </div>
+                                <div class="small-6 columns">
+                                    <rzslider
+                                            rz-slider-model="vm.iopSlider.value"
+                                            rz-slider-options="vm.iopSlider.options"></rzslider>
+                                </div>
+                                <div class="small-3 columns">
+                                    <button class="button radius tiny" ng-click="vm.OpenIOP()"
+                                            ng-class="{success: vm.iopSlider.pdfLoaded}" tooltip="{{vm.loadIOPTip}}"><i
+                                            class="fa fa-pencil-square-o fa-2x"></i></button>
+                                    <a ng-show="vm.iopSlider.pdfLoaded" ng-click="vm.iopSlider.DeletePDF()"><i
+                                            class="fa fa-trash" tooltip="{{vm.deleteIOPTip}}"></i></a>
+                                </div>
+                            </div>
+                            <div class="row collapse">
+                                <div class="small-2 small-offset-1 columns">
+                                    <p style="text-align: left; float: right;" class="pad-left"><a
+                                            ng-click="vm.ResetValues()">Reset</a>
+                                    </p>
+                                </div>
+                                <div class="small-6 small-offset-1 columns end">
+                                    <p style="text-align: right; float: left;"><span>Custom<i
+                                            class="fa fa-square fa-lg legend-custom"></i></span> <span>Default<i
+                                            class="fa fa-square fa-lg legend-default"></i></span> <span>
+                                Form<i class="fa fa-square fa-lg legend-form"></i></span></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="small-5 columns" style="margin-top: 20px;">
+        </div>
+    </div>
+    <div class="row fullWidth footer">
+        <div class="small-3 columns">
+            <button class="button radius secondary tiny" ui-sref="status">Cancel</button>
+        </div>
+        <div class="small-9 columns">
+            <div class="right" ng-if="!vm.HasMeasurementRun">
+                <button class="button radius secondary tiny" ui-sref="model.groups">Previous
+                </button>
+                <button ng-if="vm.appId === 'eclipse'" class="button radius tiny secondary-light"
+                        ng-disabled="vm.dataDetailsForm.$invalid"
+                        ng-click="vm.SkipToDeid()">Skip to De-Identification<i
+                        class="fa fa-angle-right size-18 pad-left"></i></button>
+                <button class="button radius success small" give-focus
+                        ng-disabled="vm.dataDetailsForm.$invalid"
+                        ng-click="vm.RunRiskMeasurement()">Measure Risk <i
+                        class="fa fa-play size-18 pad-left"></i></button>
+            </div>
+        </div>
+    </div>
+</form>

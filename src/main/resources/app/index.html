@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>MLibrary</title>
+    <meta name="description" content="">
+    <link rel="stylesheet" type="text/css" href="thirdparty/fonts/Roboto/roboto_regular_macroman/stylesheet.css">
+    <link rel="stylesheet" type="text/css" href="thirdparty/css/foundation/foundation.css">
+    <link rel="stylesheet" type="text/css" href="thirdparty/css/foundation/foundation-icons.css">
+    <link rel="stylesheet" type="text/css" href="thirdparty/css/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="thirdparty/css/nvd3/nv.d3.css">
+    <link rel="stylesheet" type="text/css" href="thirdparty/css/ui-select/0.17.1/select.css">
+    <link rel="stylesheet" type="text/css" href="content/css/app.min.css">
+</head>
+<body>
+
+<ng-include class="backdropBg" src="'./layout/menu/menu.html'"></ng-include>
+
+<div class="backdropBg"
+     style="background-color: white; top:3.8125rem; left: 0px; bottom: 65px; position: absolute; overflow: auto; width: 100%;">
+    <section style="height: 100%; min-height: 100%;">
+        <div style="height: 100%; min-height: 100%;" class="animate-repeat" ui-view></div>
+    </section>
+</div>
+<script type="text/javascript" src="thirdparty/js/vendor/modernizr.js"></script>
+<script type="text/javascript" src="thirdparty/js/es5-shim/v4.5.7/es5-shim.min.js"></script>
+<script type="text/javascript" src="thirdparty/js/es6-shim/v0.35.0/es6-shim.min.js"></script>
+<script type="text/javascript" src="thirdparty/js/vendor/jquery-2.1.4.min.js"></script>
+<script type="text/javascript" src="thirdparty/js/vendor/fastclick.js"></script>
+<script type="text/javascript" src="thirdparty/js/fileSaver/FileSaver.min.js"></script>
+<script type="text/javascript" src="thirdparty/js/angular/1.4.7/angular.js"></script>
+<script type="text/javascript" src="thirdparty/js/angular/1.4.7/angular-animate.js"></script>
+<script type="text/javascript" src="thirdparty/js/angular/1.4.7/angular-cookies.js"></script>
+<script type="text/javascript" src="thirdparty/js/angular/1.4.7/angular-sanitize.js"></script>
+<script type="text/javascript" src="thirdparty/js/ui-router/0.2.15/angular-ui-router.min.js"></script>
+<script type="text/javascript" src="thirdparty/js/vendor/jquery.base64.js"></script>
+<script type="text/javascript" src="thirdparty/js/foundation/foundation.min.js"></script>
+<script type="text/javascript" src="thirdparty/js/angularfoundation/mm-foundation-tpls-0.8.0.js"></script>
+<script type="text/javascript" src="thirdparty/js/ng-idle/angular-idle.min.js"></script>
+<script type="text/javascript" src="thirdparty/js/valdr/valdr.min.js"></script>
+<script type="text/javascript" src="thirdparty/js/valdr/valdr-message.min.js"></script>
+<script type="text/javascript" src="thirdparty/js/smart-table/2.1.7/smart-table.min.js"></script>
+<script type="text/javascript" src="app.min.js"></script>
+<script type="text/javascript" src="thirdparty/js/angular-http-auth-master/src/http-auth-interceptor.js"></script>
+<div class="app-alert" ng-controller="Alert as vm" style="z-index: 999;">
+    <alert class="animate-repeat radius" ng-repeat="alert in vm.alerts" type="alert.type"
+           close="vm.CloseAlert(alert.id)"
+           style="line-height: 130%;word-wrap: break-word; overflow: hidden; z-index: 999;">
+        {{alert.msg}}
+
+        <div ng-show="alert.detailedMsg">
+            <br>
+            <a style="color: white;" ng-click="vm.Expand(alert)"><i ng-show="!alert.expanded"
+                                                                    class="fa fa-chevron-up"></i></a><a
+                style="color: white;"
+                ng-click="vm.Collapse(alert)"><i ng-show="alert.expanded" class="fa fa-chevron-down"></i></a><span
+                class="pad-left">More Details</span>
+
+            <div ng-show="alert.expanded">
+                {{alert.detailedMsg}}
+            </div>
+        </div>
+    </alert>
+</div>
+<div ng-controller="Idler as vm">
+    <script type="text/ng-template" id="warning-dialog.html">
+        <div class="modal-header">
+            <h4 class="text-center">Idle</h4>
+        </div>
+        <div class="row">
+            <div class="small-8 small-offset-2 columns panel radius bg-error">
+                <p class="text-center">You are currently idle and will be logged off in
+                    {{vm.countdown}} seconds</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="small-6 small-offset-3 columns">
+                <div idle-countdown="countdown" ng-init="vm.countdown=30" class="modal-body">
+                    <progressbar max="30" value="countdown" animate="false" type="alert">
+                    </progressbar>
+                </div>
+            </div>
+        </div>
+    </script>
+</div>
+<script type="text/javascript">
+    $(document)
+            .ready(function() {
+                $(document)
+                        .foundation();
+            });
+</script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+<div class="row">
+    <div class="small-12 columns text-center">
+        <h3>Forgot your password?</h3>
+        <hr class="coolGreenLine"/>
+        <h5>Enter your email address to reset your password</h5>
+    </div>
+</div>
+<br>
+<form name="vm.myEmailForm" valdr-type="EmailForm" novalidate>
+    <div class="row">
+        <div class="small-4 small-offset-4 columns end">
+            <small>EMAIL</small>
+            <div class="row collapse postfix-radius" style="border-radius: 3px;">
+                <div class="small-8 columns" valdr-form-group>
+                    <input type="email" ng-model="vm.email" placeholder="Enter your email address"/>
+                </div>
+                <div class="small-4 columns">
+                    <button class="postfix button" ng-click="vm.SubmitEmail()">
+                        Submit
+                    </button>
+                </div>
+            </div>
+            <div>{{vm.Message}}</div>
+        </div>
+    </div>
+</form>

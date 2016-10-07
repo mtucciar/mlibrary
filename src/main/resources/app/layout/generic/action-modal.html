@@ -1,0 +1,14 @@
+<div class="row">
+    <h4 class="text-center fg-info">{{vm.TheAction | uppercase}}</h4>
+</div>
+<div class="row">
+    <div class="small-12 columns text-center fixOverflow">
+        Are you sure you want to {{vm.TheAction}} '{{vm.TheObject}}'? {{vm.TheExplanation}}
+    </div>
+</div>
+<div class="row">
+    <div class="small-3 small-offset-9 columns">
+        <button class="button radius" ng-click="vm.Yes()">Yes</button>
+        <button class="button radius" ng-click="vm.No()">No</button>
+    </div>
+</div>

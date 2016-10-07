@@ -1,0 +1,39 @@
+<form name="vm.loginForm" valdr-type="User" novalidate>
+    <div class="row">
+        <h5 class="text-center fg-info">Retry Login</h5>
+    </div>
+    <div class="row">
+        <div class="small-8 small-centered columns">
+            <div class="panel bg-info radius">
+                <p>The request you made to the server was unable to process because your token is no longer valid.
+                    Please
+                    login again to re-authenticate to the server.</p>
+            </div>
+        </div>
+    </div>
+    <div class="row radius">
+        <div class="small-4 small-centered columns">
+            <div class="row radius">
+                <div class="small-11 small-centered columns">
+                    <input type="text" class="form-control radius" placeholder="Username" ng-model="vm.user.name"
+                           name="userName" required/>
+                </div>
+            </div>
+            <div class="row radius">
+                <div class="small-11 small-centered columns">
+                    <input type="password" class="form-control radius" placeholder="Password"
+                           name="password" ng-model="vm.user.password" required>
+                </div>
+            </div>
+            <div class="row collapse">
+                <div class="small-11 small-centered columns">
+                    <button type="submit" ng-click="vm.Relogin()" class="button radius expand" ng-disabled="vm.loginForm.$invalid || vm.loginForm.$pristine"><i
+                            class="fa fa-sign-in size-18" style="margin-right: 10px;"></i>Login
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<pa-modal-error ng-if="vm.error" alertobject="vm.error"></pa-modal-error>
+<a class="close-reveal-modal" aria-label="Close" ng-click="vm.Cancel()">&#215;</a>

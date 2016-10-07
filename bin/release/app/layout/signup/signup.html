@@ -1,0 +1,49 @@
+<!--<pa-header logo-click="Home.MenuLink()"></pa-header>-->
+<!--<br>-->
+<div class="row fullExtremeWidth">
+    <div class="small-9 columns small-collapse" style="text-align:center;">
+        <pa-splash-image></pa-splash-image>
+    </div>
+    <div class="small-3 columns" ng-show="vm.IsWorking">
+        <pa-spinner spin-text="Signing Up..."></pa-spinner>
+    </div>
+    <div class="small-3 columns" ng-show="!vm.IsWorking">
+        <br>
+        <br>
+
+        <form name="vm.signupForm" valdr-type="User" novalidate>
+            <div class="row radius">
+                <h5 class="text-center">Create Account</h5>
+                <div class="row collapse prefix-radius">
+                    <div class="small-11 small-centered columns" valdr-form-group>
+                        <input type="text" name="userName" placeholder="User Name" ng-model="vm.modelUser.name"
+                               required/>
+                    </div>
+                </div>
+                <div class="row collapse prefix-radius">
+                    <div class="small-11 small-centered columns" valdr-form-group>
+                        <input type="password" name="password" placeholder="Password"
+                               ng-model="vm.modelUser.password"
+                               required/>
+                    </div>
+                </div>
+                <div class="row collapse prefix-radius">
+                    <div class="small-11 small-centered columns" valdr-form-group>
+                        <input type="password" name="verifyPassword" placeholder="Verify Password"
+                               ng-model="vm.modelUser.verifyPassword"
+                               required/>
+                    </div>
+                </div>
+                <div class="row collapse">
+                    <div class="small-11 small-centered columns">
+                        <button ng-click="vm.signupForm.$valid && vm.SignUp()"
+                                ng-disabled="vm.signupForm.$invalid || vm.signupForm.$pristine"
+                                class="button radius expand">Submit
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<pa-footer></pa-footer>
